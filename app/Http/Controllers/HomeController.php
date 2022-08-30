@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Student;
 use App\Models\Course;
+use domain\Facades\CategoryFacade;
+use domain\Facades\CaurseFacade;
+use infrastructure\Facades\BinanceFacade;
 
 
+
+
+use domain\Facades\HomeFacade;
+use domain\Facades\StudentFacade;
 
 class HomeController extends Controller
 {
@@ -26,12 +32,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+
+    // this function will start the home page
     public function index()
     {
-        $category = Category::all();
-        $students = Student::all();
-        $courses = Course::all();
-        return view('home')->with('category',$category)->with('student',$students)->with('course',$courses);
+        $category = CategoryFacade::getCategories();
+        $students = StudentFacade::getStudent();
+        $courses = CaurseFacade::getCaurse();
+        $balance = BinanceFacade::getWalletBallence();
+        return view('home')->with('category',$category)->with('student',$students)->with('course',$courses)->with('balance',$balance);
         
     }
 }

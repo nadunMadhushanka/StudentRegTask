@@ -11,4 +11,10 @@ class Course extends Model
     protected $table = 'courses';
     protected $primaryKey = 'id';
     protected $fillable = ['name', 'duration','cat_id']; 
+
+
+    static function find_course($cat_id){
+        $course = self::where('cat_id', $cat_id)->get();
+        return $course;
+    }
 }

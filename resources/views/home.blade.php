@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container">
+    
     <div class="row justify-content-center">
+        
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
@@ -11,12 +13,20 @@
                     
                     
                     <div>
+                        <div>
+                            @foreach ($balance as $item)
+                     
+                            <h1>{{ $item->crossWalletBalance }}</h1>
+                                
+                            @endforeach
+                         </div>
+                         
                         <div>Add categories</div>
                         <form action="/addCategories" method="POST">
                             {{ csrf_field() }}
                             
                             <select class="form-select" name="parent_id" id="catForm">
-                                <option selected="selected" disabled>Select parent category</option>
+                                <option selected="selected" divsabled>Select parent category</option>
                                 @foreach ($category as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -50,7 +60,7 @@
                         <form action="/addCourses" method="POST">
                             {{ csrf_field() }}
                             <select class="form-select" name="cat_id" id="catForm">
-                                <option selected="selected" disabled>Select category</option>
+                                <option selected="selected" divsabled>Select category</option>
                                 @foreach ($category as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -75,7 +85,7 @@
                             {{-- <input class="form-control" name="s_name" type="text" placeholder="Add student's name"> --}}
                             <br>
                             <select class="form-select" name="s_id" id="stuForm">
-                                <option selected="selected" disabled>Select student</option>
+                                <option selected="selected" divsabled>Select student</option>
                                 @foreach ($student as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -84,7 +94,7 @@
 
                             <br>
                             <select class="form-select courseCategory" name="category_id" id="catForm">
-                                <option selected="selected" disabled>Select category</option>
+                                <option selected="selected" divsabled>Select category</option>
                                 @foreach ($category as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
@@ -92,7 +102,7 @@
                             <span class="text-danger text-left">{{ $errors->first('category_id') }}</span>
                             <br>
                             <select class="form-select" name="c_id" id="catAdd">
-                                <option selected="selected" disabled>Select courses</option>
+                                <option selected="selected" divsabled>Select courses</option>
                                 @foreach ($course as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach

@@ -26,5 +26,13 @@ Route::post('/addStudents', [App\Http\Controllers\StudentController::class, 'sto
 Route::post('/addCourses', [App\Http\Controllers\CourseController::class, 'store']);
 Route::post('/studentCourses', [App\Http\Controllers\StudentController::class, 'storeCourses']);
 Route::get('/GetSubCaurseAgainstMainCat/{id}',[App\Http\Controllers\DynamicController::class, 'findCourseNames']);
+Route::get('/change-leverage',[App\Http\Controllers\ApiController::class, 'changeLeverageRoute']);
+Route::post('/change-lev', [App\Http\Controllers\ApiController::class,'changeLeverage'])->name('levChange');
+Route::post('/trade-buy', [App\Http\Controllers\ApiController::class,'placeOrder']);
+Route::post('/trade-sall', [App\Http\Controllers\ApiController::class,'sellCoins']);
+Route::get('/bybit-trade', [App\Http\Controllers\BybitController::class, 'changeRoute']);
+Route::post('trade-buy-bybit', [App\Http\Controllers\BybitController::class,'placeOrder']);
+Route::post('trade-sell-bybit', [App\Http\Controllers\BybitController::class,'selCoins']);
+
 
     

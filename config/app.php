@@ -16,6 +16,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'api_key_binance' =>env('API_KEY_BINANCE'),
+    'secret_key_binance' => env('SECRET_KEY_BINANCE'),
+    'api_key_bybit' =>env('API_KEY_BYBIT'),
+    'secret_key_bybit' => env('SECRET_KEY_BYBIT'),
 
     /*
     |--------------------------------------------------------------------------

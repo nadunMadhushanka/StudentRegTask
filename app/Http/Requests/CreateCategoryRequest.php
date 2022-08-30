@@ -24,8 +24,8 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'parent_category'=>'required|max:191',
-            'category_name'=>'required|max:191'
+            'parent_id'=>'required',
+            'name'=>'required'
         ];
     }
 }
