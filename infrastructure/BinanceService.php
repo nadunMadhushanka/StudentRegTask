@@ -3,15 +3,19 @@
 
 namespace infrastructure;
 
+use App\Mail\NoticeMail;
+use Illuminate\Support\Facades\Mail;
 use infrastructure\Facades\BinanceApiFacades;
 use PHPUnit\Framework\MockObject\Rule\Parameters;
+
+use function PHPUnit\Framework\isNull;
 
 class BinanceService {
 
 
     //change the leverage
-    public function changeLeverage($request){
-        $input = $request->all();
+    public function changeLeverage($input){
+        
         $leverage = $input['leverage'];
 
        $parameters['leverage'] = $leverage;
@@ -23,8 +27,7 @@ class BinanceService {
 
 
     //place order for buying coins
-    public function placeOrder($request){
-        $input = $request->all();
+    public function placeOrder($input){
         //dd($input['price']);
         $parameters['type'] = "MARKET";
         $parameters['symbol'] = "BTCUSDT";
@@ -38,14 +41,19 @@ class BinanceService {
         $path = "/fapi/v1/order";
        
         $result = BinanceApiFacades::signedRequest($path,$method,$parameters);
-        var_dump($parameters);
-        dd($result);
+        var_dump($result->symbol);
+       if(empty($result->symbol)){
+        return;
+       }else{
+        return $result->symbol;
+       }
+        
+        // dd($result);
     }
 
 
     //place order for selling coins
-    public function sellCoins($request){
-        $input = $request->all();
+    public function sellCoins($input){
         //dd($input['price']);
         $parameters['type'] = "MARKET";
         $parameters['symbol'] = "BTCUSDT";
@@ -60,7 +68,7 @@ class BinanceService {
        
         $result = BinanceApiFacades::signedRequest($path,$method,$parameters);
         var_dump($result);
-        return $result;
+        return $result->symbol;
         
     }
 
@@ -75,5 +83,7 @@ class BinanceService {
         $balance = BinanceApiFacades::signedRequest($path, $method, $parameters = []);
         return $balance;
     }
+
+    
 
 }
